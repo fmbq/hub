@@ -27,12 +27,6 @@ The rules followed and enforced by the software must be compliant with, and info
 
 ## Primary features
 
-### Score keeping
-
-- Provide a simple web app that, when provided with a secret code, allows one to fill in the scoring details for the round that the code is associated with.
-    - The web app must cache intermediate results offline so that unexpected page reloads or disconnects do not cause all progress so far to be lost.
-- Access to populating the scores for a round must be protected by a passcode.
-
 ### Tournament preparation
 
 Provide an interface that allows leaders preparing for a tournament to pre-populate the system with the quizzers and rounds that will be quizzed during the tournament. This feature not only streamlines the score keeping process for whoever might be keeping score, but also can serve as an aid for planning the tournament itself.
@@ -66,6 +60,7 @@ Provide an interface that allows leaders preparing for a tournament to pre-popul
 - Individuals rounds must have at least two quizzers.
 - Only participants with a division matching the division of an individuals round may be added to that round.
 - Creating a new round will automatically generate a unique passcode that grants access to record results for that round.
+- The user may choose to regenerate the passcode for a quiz at any time.
 
 ### Public score board
 
@@ -95,9 +90,37 @@ Provide a view which shows a quick summary of all past, current, and upcoming ro
 
 Provide a view that shows the current information and scores for a particular round.
 
+### Score keeping
+
+- Provide a simple web app that, when provided with a secret code, allows one to fill in the scoring details for the round that the code is associated with.
+    - The web app must cache intermediate results offline so that unexpected page reloads or disconnects do not cause all progress so far to be lost.
+- Access to populating the scores for a round must be protected by a passcode.
+
+#### Getting access
+
+To populate the scores for a quiz, the user must first select the desired quiz. This can be done from either the public interface, or by typing in a quiz's identifier directly.
+
+Once a quiz is selected, the user must type the passcode for that quiz correctly in order to gain access to fill in the scores.
+
+Only one user may have access to the score keeping area for a quiz at any given time. If another user attempts to keep score for a quiz while someone else also has the interface open, a message will be displayed preventing that user from continuing. User uniqueness must be determined by a browser cookie that cannot be spoofed or yield false positives.
+
+#### Populating scores
+
+If this quiz is a team round, the details of both teams are displayed. For individuals, all quizzers are displayed.
+
+    TODO
+
+Any unsaved changes so far must be persisted in local storage so that unexpected page reloads or disconnects do not cause the changes to be lost.
+
+#### Completing a quiz
+
+Once a quiz has been completed, the score keeper must press a button indicating that the quiz has been completed. The user is asked to confirm their choice, as the operation is final.
+
+A quiz that has been completed can no longer be added to or modified from the score keeping interface, even if the user knows the passcode.
+
 ### API
 
-To foster a future ecosystem of websites, apps, and smart devices that streamline and improve the Bible Quizzing program, this project should be designed to be _API-first_. Providing a public API allows other developers to build their own software that uses common data from our system and extend upon it without requiring everyone to be involved. We do not have the time and resources
+To foster a future ecosystem of websites, apps, and smart devices that streamline and improve the Bible Quizzing program, this project should be designed to be _API-first_. Providing a public API allows other developers to build their own software that uses common data from our system and extend upon it without requiring everyone to be involved.
 
 - Since HTTP clients are widely available for many languages and frameworks, the API must be an HTTP-based API to ensure broad compatibility with whatever a third-party developer is trying to build.
 - APIs that are not read-only must require some sort of authorization to prevent modifications from spam requests or bad actors.
