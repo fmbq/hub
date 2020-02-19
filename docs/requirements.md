@@ -82,39 +82,82 @@ Provide a view which allows the user to browse through past, current, and upcomi
 
 Provide a view which shows a quick summary of all past, current, and upcoming rounds for a chosen tournament.
 
+Selecting a round takes you to the round view.
+
 #### Division overview
 
 Provide a view which shows a quick summary of all past, current, and upcoming rounds that are part of the selected division.
 
+Selecting a round takes you to the round view.
+
 #### Round view
 
-Provide a view that shows the current information and scores for a particular round.
+Provide a view that shows the current information and scores for a particular round across all rooms and quizzes for that round.
+
+Selecting an individual quiz in the list takes you to the quiz view for that quiz.
+
+#### Quiz view
+
+Provide a view that shows the current information and scores for a particular quiz.
+
+This view is presented as a more traditional grid, with individual columns per quizzer and one row per question. Each cell indicates the score awarded to the quizzer during that question, with small visual icons that indicate whether a prejump occurred or missed.
+
+New updates to the round are polled by the page regularly while open, and the page is automatically populated with new changes.
 
 ### Score keeping
 
-- Provide a simple web app that, when provided with a secret code, allows one to fill in the scoring details for the round that the code is associated with.
-    - The web app must cache intermediate results offline so that unexpected page reloads or disconnects do not cause all progress so far to be lost.
-- Access to populating the scores for a round must be protected by a passcode.
+Provide a simple web app that, when provided with a secret code, allows one to fill in the scoring details for the round that the code is associated with.
 
 #### Getting access
 
 To populate the scores for a quiz, the user must first select the desired quiz. This can be done from either the public interface, or by typing in a quiz's identifier directly.
 
-Once a quiz is selected, the user must type the passcode for that quiz correctly in order to gain access to fill in the scores.
+Once a quiz is selected, the user must type the passcode into a password text field for that quiz correctly in order to gain access to fill in the scores.
 
 Only one user may have access to the score keeping area for a quiz at any given time. If another user attempts to keep score for a quiz while someone else also has the interface open, a message will be displayed preventing that user from continuing. User uniqueness must be determined by a browser cookie that cannot be spoofed or yield false positives.
 
 #### Populating scores
 
-If this quiz is a team round, the details of both teams are displayed. For individuals, all quizzers are displayed.
+Once access via passcode is granted, a new screen is displayed that allows the populating of per-question scores for the corresponding quiz.
 
-    TODO
+At the top of the screen, the details of the current quiz are displayed, such as the tournament, round number, and room,
 
-Any unsaved changes so far must be persisted in local storage so that unexpected page reloads or disconnects do not cause the changes to be lost.
+Below the round information, a form is displayed that allows the user to populate the results of the current question. The current question number is displayed at the top, with a button that advances the quiz to the next question.
+
+Below the current question number, the names of all quizzers are displayed, including those not currently in play, along with their individual cumulative scores. If this quiz is a team round, the names of both teams are also displayed along with the current cumulative score of each team.
+
+Next to each name is a selectable box that allows the user to assign points to the quizzer for answering the current question correctly. Only one quizzer may be awarded points at a time, and selecting another quizzer after already assigning points "moves" the assignment to the most recent selection. Quizzers not "in play" cannot be awarded points.
+
+A separate checkbox is also present that allows the user to indicate which quizzers prejumped during this question. In an individual round, all quizzers that have been marked as prejumped, but are not awarded points, have 10 points deducted automatically after the 3rd missed prejump for the quiz.
+
+At any time, the score keeper may tap a name listed to bring up a modal that allows you to take that quizzer in or out of play for substitutions. Quizzers that have reached 100 cumulative points are taken out of play automatically, and cannot be brought back into play.
+
+Quizzers out of play are indicated with a slight visual distinction, and all scoring buttons are disabled for such quizzers.
+
+Once the score keeper is satisfied with the data entered for the current question, the score keeper must click a button at the bottom of the view labelled "Next Question". This button saves the current information and advances the quiz to the next question.
+
+Any unsaved changes so far on this screen must be persisted in local storage so that unexpected page reloads or disconnects do not cause the changes to be lost.
+
+##### Full round view
+
+Somewhere in the score populating interface, a button or tab is visible that allows the user to quickly switch back and forth to a page that displays all the questions so far in a single screen, which allows the score keeper to double-check things as needed and to look back on previous questions should the score keeper be asked by the quizmaster to recall something.
+
+This view is identical to the public [quiz view](#quiz-view), with the following additions:
+
+- Selecting a previous question allows you to "correct" incorrectly entered information should the wrong information be entered by mistake.
+- A button or tab is present that allows the score keeper to quickly switch back to the current question view.
 
 #### Completing a quiz
 
-Once a quiz has been completed, the score keeper must press a button indicating that the quiz has been completed. The user is asked to confirm their choice, as the operation is final.
+After the quiz is considered complete, a new view is presented that allows the score keeper to finalize the results and submit them.
+
+The quiz is considered complete under any of the following conditions:
+
+- The round is a team round and the team scores are not equal after 15 questions, unless the round has the "fast rounds" option set.
+    - If the "fast round" option is set for the quiz's round, the round is complete as soon as it is mathematically over (one team is ahead and there are not enough remaining questions for the other team to tie before 15 questions).
+- The round is an individuals round and there is a clear winner after 15 questions. A clear winner is the first quizzer to reach 100+ points, or a quizzer with a score greater than all other quizzers.
+
+Once a quiz has been completed, the score keeper must press a button indicating that the quiz has been completed. The user is asked to confirm their choice, as the operation is final. In this submission view, a Comments text box is also displayed. The score keeper may optionally type in additional comments about the round in case advanced or unique instructions are needed to understand the quiz results.
 
 A quiz that has been completed can no longer be added to or modified from the score keeping interface, even if the user knows the passcode.
 
@@ -128,7 +171,6 @@ To foster a future ecosystem of websites, apps, and smart devices that streamlin
 ## Unresolved questions
 
 - Some conferences like to _bend_ conventions for their local events a little. How do we account for that, if at all?
-- Paper score sheets allow us to also track things, such as notes about question types, jump orders, etc. How can we make sure that coaches can continue to get this type of information if they are interested in it?
 
 
 [Official Rules & Guidelines]: https://dev.fmquizzing.net/resources/assets/pdfs/Rules-2019-7.4.19.pdf
