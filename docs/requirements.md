@@ -33,7 +33,7 @@ Provide an interface that allows leaders preparing for a tournament to pre-popul
 
 - Access to the preparation interface is protected by user login. Users are granted access to this interface via individual user accounts.
 - Before any new information may be entered, the user must first create a new _tournament_, where all data entered will be stored for the event the user wants to run.
-- Tournaments must have a start and end date.
+- Tournaments must have a start and end date and time.
 - Tournaments must have a location.
 - Quizzers may be added to a tournament and organized into _teams_.
 - Quizzers must have a name.
@@ -56,8 +56,10 @@ Provide an interface that allows leaders preparing for a tournament to pre-popul
 
 - A round may either be a _team round_ or an _individuals round_.
 - A round must have a division.
-- Team rounds must have exactly two teams added to it.
-- Individuals rounds must have at least two quizzers.
+- Team rounds must have at least two teams added to it.
+- Individuals rounds must have at least two quizzers added to it.
+- A round can either be a "count round" or a "no count round".
+- A round can either be a "standard" or "freeform" round.
 - Only participants with a division matching the division of an individuals round may be added to that round.
 - Creating a new round will automatically generate a unique passcode that grants access to record results for that round.
 - The user may choose to regenerate the passcode for a quiz at any time.
@@ -160,6 +162,8 @@ The quiz is considered complete under any of the following conditions:
 Once a quiz has been completed, the score keeper must press a button indicating that the quiz has been completed. The user is asked to confirm their choice, as the operation is final. In this submission view, a Comments text box is also displayed. The score keeper may optionally type in additional comments about the round in case advanced or unique instructions are needed to understand the quiz results.
 
 A quiz that has been completed can no longer be added to or modified from the score keeping interface, even if the user knows the passcode.
+
+Before results are able to be published and become visible publicly, an admin must check a checkbox indicating that the results have been approved. This manual approval step ensures that results are looked over by a human to make sure there's no unusual discrepancies.
 
 ### API
 
