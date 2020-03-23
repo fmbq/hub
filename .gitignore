@@ -3,3 +3,5 @@
 [Oo]bj
 node_modules
 wwwroot
+
+.vscode
