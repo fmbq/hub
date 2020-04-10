@@ -1,3 +1,4 @@
+using FMBQ.Hub.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -33,6 +34,14 @@ namespace FMBQ.Hub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSingleton<IConnectionProvider, SqliteConnectionProvider>();
+
+            services.AddOpenApiDocument(document => {
+                document.Title = "FMBQ Hub API";
+                document.Description = "FMBQ Hub API";
+                document.Version = "v1";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +61,10 @@ namespace FMBQ.Hub
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
+
+            app.UseOpenApi();
+            app.UseReDoc();
+
             app.UseRouting();
             app.UseAuthorization();
 
