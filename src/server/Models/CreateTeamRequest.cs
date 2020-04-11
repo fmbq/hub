@@ -3,12 +3,8 @@ using System.Collections.Generic;
 
 namespace FMBQ.Hub.Models
 {
-    public class Team
+    public class CreateTeamRequest
     {
-        public Guid Id { get; set; }
-
-        public Guid TournamentId { get; set; }
-
         /// <summary>
         /// A user-facing name for the team.
         /// </summary>
@@ -17,9 +13,9 @@ namespace FMBQ.Hub.Models
         public string DivisionId { get; set; }
 
         /// <summary>
-        /// A list of quizzers who are members of the team.
+        /// A list of person IDs who are members of the team.
         /// </summary>
         /// <value></value>
-        public List<Person> Quizzers { get; set; }
+        public List<string> Quizzers { get; set; }
     }
 }

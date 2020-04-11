@@ -5,10 +5,9 @@ namespace FMBQ.Hub.Models
 {
     public class CreateTournamentRequest
     {
-        /// <summary>
-        /// The ID of the season this tournament should belong to.
-        /// </summary>
-        public string SeasonId { get; set; }
+        public string Title { get; set; }
+
+        public string Description { get; set; }
 
         /// <summary>
         /// The full address of the primary venue the tournament is being held.

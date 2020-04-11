@@ -1,6 +1,7 @@
 using FMBQ.Hub.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -36,6 +37,7 @@ namespace FMBQ.Hub
             services.AddControllersWithViews();
 
             services.AddSingleton<IConnectionProvider, SqliteConnectionProvider>();
+            services.AddSingleton<SeasonService>();
 
             services.AddOpenApiDocument(document => {
                 document.Title = "FMBQ Hub API";
@@ -71,6 +73,7 @@ namespace FMBQ.Hub
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapFallbackToController("Get", "Frontend");
             });
         }
     }

@@ -7,7 +7,7 @@ namespace FMBQ.Hub.Controllers
     [OpenApiIgnore]
     public class FrontendController : Controller
     {
-        [HttpGet("{**url}")]
+        [HttpGet]
         public ActionResult Get()
         {
             return File("~/index.html", "text/html");

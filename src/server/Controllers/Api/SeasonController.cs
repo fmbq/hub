@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +10,13 @@ namespace FMBQ.Hub.Controllers.Api
     [Route("/api/seasons")]
     public class SeasonController : ControllerBase
     {
+        private readonly SeasonService seasonService;
+
+        public SeasonController(SeasonService seasonService)
+        {
+            this.seasonService = seasonService;
+        }
+
         /// <summary>
         /// List all seasons
         /// </summary>
@@ -15,9 +24,9 @@ namespace FMBQ.Hub.Controllers.Api
         /// Gets a list of all known quiz seasons, including past and future seasons.
         /// </remarks>
         [HttpGet]
-        public async Task<List<Season>> List()
+        public List<Season> List()
         {
-            return null;
+            return seasonService.GetAll().ToList();
         }
 
         /// <summary>
@@ -29,7 +38,16 @@ namespace FMBQ.Hub.Controllers.Api
         [HttpGet("active")]
         public async Task<List<Season>> GetActive()
         {
-            return null;
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Get all tournaments in a season
+        /// </summary>
+        [HttpGet("{seasonId}/tournaments")]
+        public async Task<List<Tournament>> GetTournaments(string seasonId)
+        {
+            throw new NotImplementedException();
         }
     }
 }
