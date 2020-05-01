@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System;
 using System.Collections.Generic;
 
@@ -8,6 +9,7 @@ namespace FMBQ.Hub.Models
         /// <summary>
         /// A user-facing name for the team.
         /// </summary>
+        [Required]
         public string Name { get; set; }
 
         public string DivisionId { get; set; }

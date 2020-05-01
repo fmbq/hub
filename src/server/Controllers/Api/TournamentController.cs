@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +26,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// List all tournaments
         /// </summary>
         [HttpGet]
+        [AuthRequired]
         public async Task<List<Tournament>> List()
         {
             throw new NotImplementedException();
@@ -45,6 +47,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// </summary>
         /// <param name="id">The tournament ID</param>
         [HttpPatch("{id}")]
+        [AuthRequired]
         public async Task Edit(string id, [FromBody] EditTournamentRequest request)
         {
             throw new NotImplementedException();
@@ -56,6 +59,27 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="id">The tournament ID</param>
         [HttpGet("{id}/quizzers")]
         public async Task<List<Person>> GetQuizzers(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Get tournament rounds
+        /// </summary>
+        /// <param name="id">The tournament ID</param>
+        [HttpGet("{id}/rounds")]
+        public async Task<List<Round>> GetRounds(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Set tournament rounds
+        /// </summary>
+        /// <param name="id">The tournament ID</param>
+        [HttpPut("{id}/rounds")]
+        [AuthRequired]
+        public async Task SetRounds(string id)
         {
             throw new NotImplementedException();
         }
@@ -75,6 +99,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// </summary>
         /// <param name="id">The tournament ID</param>
         [HttpDelete("{id}")]
+        [AuthRequired]
         public async Task Delete(string id)
         {
             throw new NotImplementedException();

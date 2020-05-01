@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,6 +17,7 @@ namespace FMBQ.Hub.Controllers.Api
         }
 
         [HttpDelete("{id}/passcode")]
+        [AuthRequired]
         public async Task<RegenerateQuizPasscodeResponse> RegeneratePasscode(string id)
         {
             throw new NotImplementedException();
@@ -31,6 +33,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="results"></param>
         /// <returns></returns>
         [HttpPost("{id}/questions")]
+        [AuthRequired]
         public async Task SubmitQuestionResults(string id, [FromBody] Quiz.QuestionResult results)
         {
             throw new NotImplementedException();
@@ -45,6 +48,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPut("{id}/results/published")]
+        [AuthRequired]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task PublishResults(string id)
         {
@@ -59,6 +63,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// </remarks>
         /// <param name="id"></param>
         [HttpDelete("{id}/results/published")]
+        [AuthRequired]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task UnpublishResults(string id)
         {

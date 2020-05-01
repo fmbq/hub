@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// </param>
         /// <returns></returns>
         [HttpPost("/api/tournaments/{tournamentId}/teams")]
+        [AuthRequired]
         public async Task<CreateTeamResponse> Create(string tournamentId, [FromBody] CreateTeamRequest request)
         {
             throw new NotImplementedException();
@@ -34,6 +36,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPatch("{id}")]
+        [AuthRequired]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task Edit(string id, [FromBody] EditTeamRequest request)
         {
@@ -46,6 +49,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="id">The team ID</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
+        [AuthRequired]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         public async Task Delete(string id)
         {

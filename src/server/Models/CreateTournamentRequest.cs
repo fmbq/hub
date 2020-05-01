@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace FMBQ.Hub.Models
 {
     public class CreateTournamentRequest
     {
+        [Required]
         public string Title { get; set; }
 
         public string Description { get; set; }
@@ -14,8 +16,10 @@ namespace FMBQ.Hub.Models
         /// </summary>
         public string Location { get; set; }
 
+        [Required]
         public DateTime StartDate { get; set; }
 
+        [Required]
         public DateTime EndDate { get; set; }
     }
 }

@@ -16,6 +16,8 @@ namespace FMBQ.Hub.Database
             {
                 DataSource = "data.db"
             }.ToString());
+
+            connection.Open();
         }
 
         public void Dispose()

@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace FMBQ.Hub.Controllers.Api
         }
 
         [HttpPost]
+        [AuthRequired]
         public async Task Create([FromBody] Person person)
         {
             throw new NotImplementedException();
