@@ -12,11 +12,17 @@ namespace FMBQ.Hub.Auth
 {
     public class AuthFilter : IAsyncResourceFilter
     {
+        private readonly ApiTokenService apiTokenService;
         private readonly UserService userService;
         private readonly ILogger logger;
 
-        public AuthFilter(UserService userService, ILogger<AuthFilter> logger)
+        public AuthFilter(
+            ApiTokenService apiTokenService,
+            UserService userService,
+            ILogger<AuthFilter> logger
+        )
         {
+            this.apiTokenService = apiTokenService;
             this.userService = userService;
             this.logger = logger;
         }
@@ -59,7 +65,7 @@ namespace FMBQ.Hub.Auth
 
                     if (auth.Scheme.Equals("bearer", StringComparison.OrdinalIgnoreCase))
                     {
-                        if (auth.Parameter == "foobar")
+                        if (await apiTokenService.Validate(auth.Parameter))
                         {
                             return true;
                         }

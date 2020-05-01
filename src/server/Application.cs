@@ -36,6 +36,7 @@ namespace FMBQ.Hub
             services.AddControllersWithViews();
 
             services.AddSingleton<IConnectionProvider, SqliteConnectionProvider>();
+            services.AddSingleton<ApiTokenService>();
             services.AddSingleton<SeasonService>();
             services.AddSingleton<UserService>();
 
