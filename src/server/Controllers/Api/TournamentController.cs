@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace FMBQ.Hub.Controllers.Api
 {
     [Route("/api/tournaments")]
+    [OpenApiTag("tournaments", Description = "Tournaments API")]
     public class TournamentController : ControllerBase
     {
         /// <summary>
@@ -18,7 +20,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// </remarks>
         /// <param name="seasonId">The season ID the tournament belongs to</param>
         [HttpPost("/api/seasons/{seasonId}/tournaments")]
-        public async Task Create(string seasonId, [FromBody] CreateTournamentRequest request) {
+        public async Task CreateTournament(string seasonId, [FromBody] CreateTournamentRequest request) {
             throw new NotImplementedException();
         }
 
@@ -26,8 +28,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// List all tournaments
         /// </summary>
         [HttpGet]
-        [AuthRequired]
-        public async Task<List<Tournament>> List()
+        public async Task<List<Tournament>> GetTournaments()
         {
             throw new NotImplementedException();
         }
@@ -37,7 +38,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// </summary>
         /// <param name="id">The tournament ID</param>
         [HttpGet("{id}")]
-        public async Task<Tournament> Get(string id)
+        public async Task<Tournament> GetTournament(string id)
         {
             throw new NotImplementedException();
         }
@@ -48,7 +49,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="id">The tournament ID</param>
         [HttpPatch("{id}")]
         [AuthRequired]
-        public async Task Edit(string id, [FromBody] EditTournamentRequest request)
+        public async Task UpdateTournament(string id, [FromBody] EditTournamentRequest request)
         {
             throw new NotImplementedException();
         }
@@ -100,7 +101,7 @@ namespace FMBQ.Hub.Controllers.Api
         /// <param name="id">The tournament ID</param>
         [HttpDelete("{id}")]
         [AuthRequired]
-        public async Task Delete(string id)
+        public async Task DeleteTournament(string id)
         {
             throw new NotImplementedException();
         }

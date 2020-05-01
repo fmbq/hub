@@ -4,10 +4,12 @@ using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace FMBQ.Hub.Controllers.Api
 {
     [Route("/api/teams")]
+    [OpenApiTag("teams")]
     public class TeamsController : ControllerBase
     {
         /// <summary>
@@ -19,13 +21,13 @@ namespace FMBQ.Hub.Controllers.Api
         /// <returns></returns>
         [HttpPost("/api/tournaments/{tournamentId}/teams")]
         [AuthRequired]
-        public async Task<CreateTeamResponse> Create(string tournamentId, [FromBody] CreateTeamRequest request)
+        public async Task<CreateTeamResponse> CreateTeam(string tournamentId, [FromBody] CreateTeamRequest request)
         {
             throw new NotImplementedException();
         }
 
         [HttpGet("{id}")]
-        public async Task<Team> Get(string id)
+        public async Task<Team> GetTeam(string id)
         {
             return null;
         }
@@ -38,7 +40,7 @@ namespace FMBQ.Hub.Controllers.Api
         [HttpPatch("{id}")]
         [AuthRequired]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task Edit(string id, [FromBody] EditTeamRequest request)
+        public async Task UpdateTeam(string id, [FromBody] EditTeamRequest request)
         {
             throw new NotImplementedException();
         }
@@ -51,7 +53,7 @@ namespace FMBQ.Hub.Controllers.Api
         [HttpDelete("{id}")]
         [AuthRequired]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
-        public async Task Delete(string id)
+        public async Task DeleteTeam(string id)
         {
             throw new NotImplementedException();
         }

@@ -45,6 +45,7 @@ namespace FMBQ.Hub
                 document.Title = "FMBQ Hub API";
                 document.Description = "FMBQ Hub API";
                 document.Version = "v1";
+                document.OperationProcessors.Add(new OpenApiOperationIdGenerator());
             });
 
             services.AddDistributedMemoryCache();

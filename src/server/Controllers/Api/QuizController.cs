@@ -4,14 +4,16 @@ using FMBQ.Hub.Auth;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace FMBQ.Hub.Controllers.Api
 {
     [Route("/api/quiz")]
+    [OpenApiTag("quiz")]
     public class QuizController : ControllerBase
     {
         [HttpGet("{id}")]
-        public async Task<Quiz> Get(string id)
+        public async Task<Quiz> GetQuiz(string id)
         {
             throw new NotImplementedException();
         }

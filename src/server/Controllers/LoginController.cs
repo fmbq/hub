@@ -3,9 +3,11 @@ using System.Threading.Tasks;
 using FMBQ.Hub.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NSwag.Annotations;
 
 namespace FMBQ.Hub.Controllers
 {
+    [OpenApiIgnore]
     public class LoginController : ControllerBase
     {
         private readonly UserService userService;
