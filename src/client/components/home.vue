@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import SwaggerClient from "swagger-client";
+import api from "../api";
 
 export default {
     data() {
@@ -32,9 +32,7 @@ export default {
 
     async mounted() {
         try {
-            let client = await new SwaggerClient("/swagger/v1/swagger.json");
-            this.seasons = (await client.apis.seasons.getSeasons()).obj;
-            console.log(this.seasons);
+            this.seasons = (await api.seasons.getSeasons()).obj;
             this.loading = false;
         } catch (error) {
             console.log(error);
