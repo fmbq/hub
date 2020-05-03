@@ -2,6 +2,8 @@
   "name": "fmbq-hub",
   "private": true,
   "dependencies": {
+    "axios": "^0.19.2",
+    "swagger-client": "^3.10.1",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
     "vue-meta": "^2.3.3",
@@ -16,7 +18,9 @@
   },
   "scripts": {
     "build": "parcel build src/client/index.html --out-dir wwwroot",
+    "generate-openapi": "dotnet msbuild -t:GenerateOpenApi",
+    "dotnet-watch": "dotnet watch run",
     "parcel-watch": "parcel watch src/client/index.html --out-dir wwwroot",
-    "watch": "concurrently \"dotnet watch run\" npm:parcel-watch"
+    "watch": "concurrently npm:dotnet-watch npm:parcel-watch"
   }
 }
