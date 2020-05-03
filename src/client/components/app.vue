@@ -6,6 +6,7 @@
             </router-link>
             <nav>
                 <router-link to="/about">About</router-link>
+                <a href="/swagger">API Docs</a>
             </nav>
         </header>
 

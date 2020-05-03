@@ -26,6 +26,16 @@ namespace FMBQ.Hub.Controllers.Api
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Get a quiz team
+        /// </summary>
+        /// <remarks>
+        /// Get information about a quiz team by its ID.
+        /// </remarks>
+        /// <param name="id">
+        /// The team unique ID.
+        /// </param>
+        /// <returns></returns>
         [HttpGet("{id}")]
         public async Task<Team> GetTeam(string id)
         {
