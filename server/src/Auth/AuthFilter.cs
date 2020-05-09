@@ -48,13 +48,13 @@ namespace FMBQ.Hub.Auth
         {
             try
             {
-                await context.Session.LoadAsync();
                 // Check for login session.
+                await context.Session.LoadAsync();
                 if (context.Session.IsAvailable)
                 {
-                    if (long.TryParse(context.Session.GetString("userId"), out long userId))
+                    if (context.Session.GetString("userId") != null)
                     {
-                        return true;
+                        return await userService.IsValidUser(context.Session.GetString("userId"));
                     }
                 }
 

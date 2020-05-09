@@ -13,6 +13,7 @@ namespace FMBQ.Hub.Models
 
     public class Round
     {
+        public string Id { get; set; }
         public RoundType Type { get; set; }
         public Tournament.Division Division { get; set; }
         public bool Freeform { get; set; }

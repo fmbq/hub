@@ -17,10 +17,10 @@
     "vue-template-compiler": "^2.6.11"
   },
   "scripts": {
-    "build": "parcel build src/client/index.html --out-dir wwwroot",
+    "build": "parcel build client/src/index.html --out-dir wwwroot",
     "generate-openapi": "dotnet msbuild -t:GenerateOpenApi",
-    "dotnet-watch": "dotnet watch run",
-    "parcel-watch": "parcel watch src/client/index.html --out-dir wwwroot",
+    "dotnet-watch": "dotnet watch --project server/src/server.csproj run",
+    "parcel-watch": "parcel watch client/src/index.html --out-dir wwwroot",
     "watch": "concurrently npm:dotnet-watch npm:parcel-watch"
   }
 }

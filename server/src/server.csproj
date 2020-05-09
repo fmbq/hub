@@ -15,6 +15,10 @@
         </PackageReference>
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Include="Resources/**" />
+    </ItemGroup>
+
     <Target Name="GenerateOpenApi">
         <Exec EnvironmentVariables="ASPNETCORE_ENVIRONMENT=Development" Command="$(NSwagExe_Core31) aspnetcore2openapi /assembly:$(TargetDir)hub.dll /startup:hub:FMBQ.Hub.Application /output:obj/openapi.json" />
     </Target>

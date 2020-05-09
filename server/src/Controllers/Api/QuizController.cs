@@ -22,7 +22,51 @@ namespace FMBQ.Hub.Controllers.Api
         /// Public details about the quiz.
         /// </returns>
         [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<Quiz> GetQuiz(string id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut("{quizId}/quizzers/{personId}")]
+        [AuthRequired]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task AddQuizzerToQuiz(string quizId, string personId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete("{quizId}/quizzers/{personId}")]
+        [AuthRequired]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task RemoveQuizzerFromQuiz(string quizId, string personId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpPut("{quizId}/teams/{teamId}")]
+        [AuthRequired]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
+        public async Task AddTeamToQuiz(string quizId, string teamId)
+        {
+            throw new NotImplementedException();
+        }
+
+        [HttpDelete("{quizId}/teams/{teamId}")]
+        [AuthRequired]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task RemoveTeamFromQuiz(string quizId, string teamId)
         {
             throw new NotImplementedException();
         }

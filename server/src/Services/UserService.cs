@@ -1,7 +1,6 @@
 using System;
 using System.Threading.Tasks;
 using FMBQ.Hub.Database;
-using FMBQ.Hub.Models;
 using Microsoft.Extensions.Logging;
 
 namespace FMBQ.Hub
@@ -17,11 +16,24 @@ namespace FMBQ.Hub
             this.logger = logger;
         }
 
-        public async Task<long?> ValidateCredentials(string email, string password)
+        public async Task<bool> IsValidUser(string id)
+        {
+            using (var command = connectionProvider.CreateCommand("SELECT COUNT(*) FROM User WHERE id = @id"))
+            {
+                command.AddParameter("@id", id);
+
+                using (var reader = await command.ExecuteReaderAsync())
+                {
+                    return await command.ExecuteScalarAsync<long?>() > 0;
+                }
+            }
+        }
+
+        public async Task<string> ValidateCredentials(string email, string password)
         {
             try
             {
-                using (var command = connectionProvider.CreateCommand("SELECT rowid, password FROM users WHERE email = @email"))
+                using (var command = connectionProvider.CreateCommand("SELECT id, password FROM User WHERE email = @email"))
                 {
                     command.AddParameter("@email", email);
 
@@ -29,7 +41,7 @@ namespace FMBQ.Hub
                     {
                         if (await reader.ReadAsync())
                         {
-                            long? id = reader.GetInt64(0);
+                            string id = reader.GetString(0);
                             string hash = reader.GetString(1);
 
                             return BCrypt.Net.BCrypt.Verify(password, hash) ? id : null;

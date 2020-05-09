@@ -2,6 +2,7 @@
 .vscode
 [Bb]in
 [Oo]bj
+out
 node_modules
 /wwwroot
 *.db

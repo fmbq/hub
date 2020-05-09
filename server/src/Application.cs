@@ -1,3 +1,4 @@
+using System.IO;
 using System;
 using FMBQ.Hub.Auth;
 using FMBQ.Hub.Database;
@@ -8,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using static System.Environment;
 
 namespace FMBQ.Hub
 {
@@ -40,6 +42,8 @@ namespace FMBQ.Hub
             services.AddSingleton<SeasonService>();
             services.AddSingleton<UserService>();
 
+            services.AddHostedService<DbStartup>();
+
             services.AddOpenApiDocument(document =>
             {
                 document.Title = "FMBQ Hub API";
@@ -57,6 +61,12 @@ namespace FMBQ.Hub
                 options.Cookie.IsEssential = true;
                 options.Cookie.SameSite = SameSiteMode.Strict;
             });
+
+            Configuration["SqlitePath"] = Path.Combine(
+                Environment.GetFolderPath(SpecialFolder.LocalApplicationData),
+                "fmbq-hub",
+                "data.db"
+            );
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

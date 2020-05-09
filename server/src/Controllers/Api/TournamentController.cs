@@ -85,6 +85,13 @@ namespace FMBQ.Hub.Controllers.Api
             throw new NotImplementedException();
         }
 
+        [HttpGet("{tournamentId}/rounds/{roundId}/unassigned-teams")]
+        [AuthRequired]
+        public async Task GetUnassignedTeamsForRound(string tournamentId)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Get tournament teams
         /// </summary>

@@ -8,10 +8,7 @@ namespace FMBQ.Hub.Database
 
         DbCommand CreateCommand(string query)
         {
-            var command = Connection.CreateCommand();
-            command.CommandText = query;
-
-            return command;
+            return Connection.CreateCommand(query);
         }
     }
 }
