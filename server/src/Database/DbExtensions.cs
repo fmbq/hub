@@ -22,7 +22,7 @@ namespace FMBQ.Hub.Database
         {
             var parameter = command.CreateParameter();
             parameter.ParameterName = name;
-            parameter.Value = value;
+            parameter.Value = value ?? DBNull.Value;
             command.Parameters.Add(parameter);
         }
 
@@ -36,6 +36,11 @@ namespace FMBQ.Hub.Database
             }
 
             return (T)result;
+        }
+
+        public static string GetStringOrNull(this DbDataReader reader, int ordinal)
+        {
+            return reader.IsDBNull(ordinal) ? null : reader.GetString(ordinal);
         }
     }
 }

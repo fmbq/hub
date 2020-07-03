@@ -25,6 +25,39 @@ namespace FMBQ.Hub
             this.connectionProvider = connectionProvider;
         }
 
+        public async Task<string> Create(CreateQuizRequest request)
+        {
+            using (var command = connectionProvider.CreateCommand(@"
+                INSERT INTO Quiz (
+                    id,
+                    tournamentId,
+                    type,
+                    room,
+                    passcode
+                )
+                VALUES (
+                    @id,
+                    @tournamentId,
+                    @type,
+                    @room,
+                    @passcode
+                )
+            "))
+            {
+                string id = Guid.NewGuid().ToString();
+
+                command.AddParameter("@id", id);
+                command.AddParameter("@tournamentId", request.TournamentId);
+                command.AddParameter("@type", request.Type);
+                command.AddParameter("@room", request.Room);
+                command.AddParameter("@passcode", GeneratePasscode());
+
+                await command.ExecuteNonQueryAsync();
+
+                return id;
+            }
+        }
+
         public async Task<Quiz> Get(string id)
         {
             using (var command = connectionProvider.CreateCommand("SELECT id FROM Quiz WHERE id = @id"))

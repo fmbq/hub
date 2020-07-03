@@ -1,7 +1,9 @@
+using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using FMBQ.Hub.Database;
 using FMBQ.Hub.Models;
+using System.Text.Json;
 
 namespace FMBQ.Hub
 {
@@ -14,9 +16,38 @@ namespace FMBQ.Hub
             this.connectionProvider = connectionProvider;
         }
 
+        public async Task<string> CreateRound(
+            string tournamentId,
+            RoundType type,
+            bool freeform = false
+        )
+        {
+            using (var command = connectionProvider.CreateCommand(@"
+                INSERT INTO Round (id, tournamentId, type, freeform)
+                VALUES (@id, @tournamentId, @type, @freeform)
+            "))
+            {
+                string id = Guid.NewGuid().ToString();
+
+                command.AddParameter("@id", id);
+                command.AddParameter("@tournamentId", tournamentId);
+                command.AddParameter("@type", type.ToString().ToLower());
+                command.AddParameter("@freeform", freeform);
+
+                await command.ExecuteNonQueryAsync();
+
+                return id;
+            }
+        }
+
         public async Task<Round> Get(string id)
         {
-            using (var command = connectionProvider.CreateCommand("SELECT (id, type) FROM Round WHERE id = @id"))
+            using (var command = connectionProvider.CreateCommand(@"
+                SELECT round.id, round.type, json_group_array(quiz.id) AS quizIds
+                FROM Round round
+                WHERE id = @id
+                JOIN Quiz quiz ON quiz.roundId = round.id
+            "))
             {
                 command.AddParameter("@id", id);
 
@@ -24,12 +55,14 @@ namespace FMBQ.Hub
                 {
                     id = reader.GetString(0);
                     string type = reader.GetString(1);
+                    List<string> quizIds = JsonSerializer.Deserialize<List<string>>(reader.GetString(2));
 
                     if (type == "team")
                     {
                         return new TeamRound
                         {
                             Id = id,
+                            QuizIds = quizIds,
                         };
                     }
                     else
@@ -37,6 +70,7 @@ namespace FMBQ.Hub
                         return new IndividualsRound
                         {
                             Id = id,
+                            QuizIds = quizIds,
                         };
                     }
                 }

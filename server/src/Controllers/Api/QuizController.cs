@@ -12,6 +12,32 @@ namespace FMBQ.Hub.Controllers.Api
     [OpenApiTag("quiz")]
     public class QuizController : ControllerBase
     {
+        private readonly QuizService quizService;
+
+        public QuizController(QuizService quizService)
+        {
+            this.quizService = quizService;
+        }
+
+        /// <summary>
+        /// Create a new quiz.
+        /// </summary>
+        /// <remarks>
+        /// The date and time of the quiz is controlled by the schedule
+        /// arrangement of the enclosing tournament.
+        /// </remarks>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<CreateQuizResponse> CreateQuiz([FromBody] CreateQuizRequest request)
+        {
+            string id = await quizService.Create(request);
+
+            return new CreateQuizResponse
+            {
+                Id = id,
+            };
+        }
+
         /// <summary>
         /// Get quiz
         /// </summary>

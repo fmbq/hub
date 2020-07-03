@@ -12,16 +12,27 @@ namespace FMBQ.Hub.Controllers.Api
     [OpenApiTag("tournaments", Description = "Tournaments API")]
     public class TournamentController : ControllerBase
     {
+        private readonly TournamentService tournamentService;
+
+        public TournamentController(TournamentService tournamentService)
+        {
+            this.tournamentService = tournamentService;
+        }
+
         /// <summary>
         /// Create a tournament
         /// </summary>
         /// <remarks>
         /// Creates a new tournament.
         /// </remarks>
-        /// <param name="seasonId">The season ID the tournament belongs to</param>
-        [HttpPost("/api/seasons/{seasonId}/tournaments")]
-        public async Task CreateTournament(string seasonId, [FromBody] CreateTournamentRequest request) {
-            throw new NotImplementedException();
+        [HttpPost]
+        public async Task<CreateTournamentResponse> CreateTournament([FromBody] CreateTournamentRequest request) {
+            string id = await tournamentService.CreateTournament(request);
+
+            return new CreateTournamentResponse
+            {
+                TournamentId = id,
+            };
         }
 
         /// <summary>
@@ -40,7 +51,7 @@ namespace FMBQ.Hub.Controllers.Api
         [HttpGet("{id}")]
         public async Task<Tournament> GetTournament(string id)
         {
-            throw new NotImplementedException();
+            return await tournamentService.Get(id);
         }
 
         /// <summary>

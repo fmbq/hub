@@ -13,7 +13,8 @@ CREATE TABLE Person (
 
 CREATE TABLE Quiz (
     `id` TEXT NOT NULL PRIMARY KEY,
-    `roundId` TEXT NOT NULL REFERENCES Round(`id`),
+    `tournamentId` TEXT NOT NULL REFERENCES Tournament(`id`),
+    `type` TEXT NOT NULL,
     `room` TEXT NOT NULL,
     `passcode` TEXT NOT NULL
 );
@@ -56,8 +57,14 @@ CREATE TABLE ScoringSession (
 CREATE TABLE Team (
     `id` TEXT NOT NULL PRIMARY KEY,
     `tournamentId` TEXT NOT NULL REFERENCES Tournament(`id`),
-    `name` TEXT NOT NULL,
-    `quizzers` JSON DEFAULT "[]"
+    `name` TEXT NOT NULL
+);
+
+CREATE TABLE TeamAssignment (
+    `teamId` TEXT NOT NULL REFERENCES Team(`id`),
+    `personId` TEXT NOT NULL REFERENCES Person(`id`),
+
+    PRIMARY KEY (`teamId`, `personId`)
 );
 
 CREATE TABLE Tournament (

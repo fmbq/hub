@@ -17,14 +17,15 @@ namespace FMBQ.Hub
     {
         public static void Main(string[] args)
         {
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Application>();
-                })
-                .Build()
-                .Run();
+            CreateHostBuilder(args).Build().Run();
         }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) => Host
+            .CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Application>();
+            });
 
         public Application(IConfiguration configuration)
         {
@@ -39,7 +40,9 @@ namespace FMBQ.Hub
 
             services.AddSingleton<IConnectionProvider, SqliteConnectionProvider>();
             services.AddSingleton<ApiTokenService>();
+            services.AddSingleton<QuizService>();
             services.AddSingleton<SeasonService>();
+            services.AddSingleton<TournamentService>();
             services.AddSingleton<UserService>();
 
             services.AddHostedService<DbStartup>();
