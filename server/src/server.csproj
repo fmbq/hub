@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <PackageReference Include="BCrypt.Net-Next" Version="4.0.0" />
-        <PackageReference Include="Microsoft.Data.SQLite" Version="3.1.5" />
+        <PackageReference Include="Microsoft.Data.SQLite" Version="3.1.6" />
         <PackageReference Include="NSwag.AspNetCore" Version="13.6.2" />
         <PackageReference Include="NSwag.MSBuild" Version="13.6.2">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
