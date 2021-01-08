@@ -2,7 +2,7 @@
   "name": "fmbq-hub",
   "private": true,
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "swagger-client": "^3.10.1",
     "vue": "^2.6.11",
     "vue-hot-reload-api": "^2.3.4",
