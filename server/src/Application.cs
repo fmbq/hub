@@ -24,7 +24,7 @@ namespace FMBQ.Hub
             .CreateDefaultBuilder(args)
             .ConfigureWebHostDefaults(webBuilder =>
             {
-                webBuilder.UseStartup<Application>();
+                webBuilder.UseStartup<Application>().UseWebRoot("../../wwwroot");
             });
 
         public Application(IConfiguration configuration)

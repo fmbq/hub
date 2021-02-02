@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+FROM mcr.microsoft.com/dotnet/sdk:5.0
 WORKDIR /app
 COPY . ./
 RUN dotnet restore
@@ -11,7 +11,7 @@ RUN npm ci
 COPY . ./
 RUN npm run build
 
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
 COPY --from=0 /app/out .
 COPY --from=1 /app/wwwroot wwwroot
