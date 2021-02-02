@@ -17,6 +17,12 @@ namespace FMBQ.Hub.Models
         public RoundType Type { get; set; }
         public Tournament.Division Division { get; set; }
         public bool Freeform { get; set; }
+
+        /// <summary>
+        /// A list of quiz IDs belonging to this round.
+        /// </summary>
+        /// <value></value>
+        public List<string> QuizIds { get; set; }
     }
 
     public class TeamRound : Round

@@ -7,6 +7,9 @@ namespace FMBQ.Hub.Models
     public class CreateTournamentRequest
     {
         [Required]
+        public int SeasonId { get; set; }
+
+        [Required]
         public string Title { get; set; }
 
         public string Description { get; set; }

@@ -12,6 +12,11 @@ namespace FMBQ.Hub.Models
         [Required]
         public string Name { get; set; }
 
+        /// <summary>
+        /// A short team "number" to identify a team by within a tournament.
+        /// </summary>
+        public string Number { get; set; }
+
         public string DivisionId { get; set; }
 
         /// <summary>

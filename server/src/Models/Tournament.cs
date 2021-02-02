@@ -25,9 +25,32 @@ namespace FMBQ.Hub.Models
         /// </summary>
         public Dictionary<string, Division> Divisions { get; set; }
 
+        public List<Room> Rooms { get; set; }
+
         public class Division
         {
             public bool Custom { get; set; }
+        }
+
+        /// <summary>
+        /// A "room" that is available in a tournament.
+        ///
+        /// A room does not have to be a physical location.
+        /// </summary>
+        public class Room
+        {
+            public string Name { get; set; }
+            public string Description { get; set; }
+        }
+
+        public class Schedule
+        {
+            public List<Round> Rounds { get; set; }
+
+            public class Round
+            {
+                public List<string> QuizIds { get; set; }
+            }
         }
     }
 }
