@@ -1,0 +1,120 @@
+@import url('https://fonts.googleapis.com/css2?family=Calistoga&family=Caprasimo&display=swap');
+
+:root {
+    --color-blue: #03a9fa;
+    --color-cream: hsl(53, 88%, 93%);
+
+    /* taken from logo */
+    --color-purple: hsl(247, 43%, 44%);
+    --color-deep-purple: hsl(263, 50%, 20%);
+    --color-yellow: hsl(53, 88%, 57%);
+    --color-red: hsl(360, 84%, 55%);
+    --color-green: hsl(147, 92%, 15%); /* this color is awful... */
+}
+
+*, ::before, ::after {
+    box-sizing: border-box;
+}
+
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background-color: #efefef;
+    background-image: url("/resources/debut_light.png");
+}
+
+body {
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    font-family: 'Open Sans', sans-serif;
+    color: #444;
+}
+
+body > * {
+    width: 100%;
+}
+
+body > header > nav, body > main, .container {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+body > header {
+    background-color: var(--color-purple);
+    background-image: linear-gradient(170deg, var(--color-deep-purple) 0%, var(--color-purple) 70%);
+    color: white;
+    box-shadow: inset 1px 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+body > main {
+    font-size: 1.125em;
+}
+
+body > header > nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+}
+
+body > header .links .button {
+    margin-left: 1.5rem;
+}
+
+#logo {
+    padding-left: 80px;
+    height: 64px;
+    background-image: url("/resources/logos/FMBQ-logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* color: white; */
+}
+
+body > footer {
+    /* background-color: #ddd; */
+    /* background-image: url("/resources/round.png"); */
+    padding: 1rem;
+    min-height: 200px;
+}
+
+.button {
+    display: inline-block;
+    background-color: var(--color-cream);
+    color: hsl(0, 0%, 14%);
+    border-radius: 8rem;
+    padding: 0.5rem 1.5rem;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s ease-in-out;
+    border: 2px solid #444;
+    text-transform: uppercase;
+}
+
+.button:hover {
+    background-color: var(--color-yellow);
+}
+
+h2, h3 {
+    color: var(--color-deep-purple);
+}
+
+h1 {
+    font-family: 'Calistoga', sans-serif;
+    text-transform: uppercase;
+    color: var(--color-purple);
+    font-size: 3em;
+    font-weight: normal;
+    /* color: transparent; */
+    /* -webkit-text-stroke: 3px var(--color-deep-purple); */
+    /* text-shadow:
+        -1px 1px 0 var(--color-deep-purple),
+        1px 1px 0 var(--color-deep-purple),
+        1px -1px 0 var(--color-deep-purple),
+        -1px -1px 0 var(--color-deep-purple); */
+}

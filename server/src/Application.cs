@@ -2,6 +2,7 @@ using System.IO;
 using System;
 using FMBQ.Hub.Auth;
 using FMBQ.Hub.Database;
+using Markdig;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using static System.Environment;
+using Lib.AspNetCore.ServerSentEvents;
 
 namespace FMBQ.Hub
 {
@@ -37,6 +39,18 @@ namespace FMBQ.Hub
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddServerSentEvents();
+
+            services.AddSingleton<MarkdownPipeline>(new MarkdownPipelineBuilder()
+                .UseAutoIdentifiers()
+                .UseAutoLinks()
+                .UseFootnotes()
+                .UsePipeTables()
+                .UseSmartyPants()
+                .Build());
+
+            services.AddSingleton<MarkdownTagHelper>();
 
             services.AddSingleton<IConnectionProvider, SqliteConnectionProvider>();
             services.AddSingleton<ApiTokenService>();
@@ -90,6 +104,8 @@ namespace FMBQ.Hub
             app.UseOpenApi();
             app.UseReDoc();
 
+            app.MapServerSentEvents("/events");
+
             app.UseRouting();
 
             app.UseCookiePolicy();
@@ -98,6 +114,7 @@ namespace FMBQ.Hub
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapRazorPages();
                 endpoints.MapFallbackToController("Get", "Frontend");
             });
         }

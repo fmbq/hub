@@ -4,5 +4,4 @@
 [Oo]bj
 out
 node_modules
-/wwwroot
 *.db

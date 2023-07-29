@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Free Methodist Bible Quizzing</title>
+
+        <link rel="stylesheet" href="/styles/site.css" />
+        <script src="/js/vendor/htmx/1.9.3/htmx.min.js"></script>
+        <script src="/js/vendor/htmx/1.9.3/ext/sse.js"></script>
+    </head>
+    <body>
+        <header>
+            <nav hx-boost="true">
+                <a id="logo" class="title" href="/">Free Methodist Bible Quizzing</a>
+                <div class="links">
+                    <a class="button" href="/about">About</a>
+                    <a class="button" href="/media">Media</a>
+                    <a class="button" href="/finals">Finals</a>
+                </div>
+            </nav>
+        </header>
+
+        <main role="main">
+            @RenderBody()
+        </main>
+
+        <footer>
+            <div class="container">
+                <a href="/api">API Documentation</a>
+
+                <p class="center copyright">&copy; @DateTime.Now.Year Free Methodist Bible Quizzing</p>
+            </div>
+        </footer>
+    </body>
+</html>

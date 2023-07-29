@@ -10,7 +10,8 @@ namespace FMBQ.Hub.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            return File("~/index.html", "text/html");
+            // return File("~/index.html", "text/html");
+            return View("Home");
         }
     }
 }

@@ -1,0 +1,17 @@
+@{
+    Layout = "Layout";
+}
+@using FMBQ.Hub
+@inject SeasonService seasons
+
+<h1>Home</h1>
+<h2>Seasons</h2>
+
+<section>
+    <ul>
+        @foreach (var season in seasons.GetAll())
+        {
+            <li>@season.StartingYear - @season.EndingYear</li>
+        }
+    </ul>
+</section>
